@@ -1,0 +1,38 @@
+{
+  "name": "dn_nearest_link_finder",
+  "version": "1.0.0",
+  "description": "Finds the nearest point belonging to the graph",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DnAp/DnNearestLinkFinder.git"
+  },
+  "keywords": [
+    "graph",
+    "graph theory",
+    "edge",
+    "vertex",
+    "node",
+    "network",
+    "connection",
+    "ngraph",
+    "vivagraph",
+    "ngraphjs"
+  ],
+  "author": "Anatolii Lebedev",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/DnAp/DnNearestLinkFinder/issues"
+  },
+  "type": "module",
+  "devDependencies": {
+    "mocha": "^8.2.1",
+    "ngraph.fromjson": "^3.0.0"
+  },
+  "dependencies": {
+    "ngraph.graph": "^19.1.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
