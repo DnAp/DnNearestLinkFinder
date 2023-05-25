@@ -122,7 +122,7 @@ export default class DnNearestLinkFinder {
         poly.push(currentNode);
 
         do {
-            links = currentNode.data.linksByAngle;
+            links = this._getUniqueNodeLinks(currentNode.data.linksByAngle);
             if (links.length === 1) {
                 [prevNode, currentNode] = [currentNode, prevNode];
                 poly.push(currentNode);
@@ -138,6 +138,13 @@ export default class DnNearestLinkFinder {
         } while (currentNode !== startNode);
 
         return poly;
+    }
+
+    _getUniqueNodeLinks(links) {
+        return Object.values(links.reduce((result, link) => ({
+            ...result,
+            [link.node.id]: link,
+        }), {}));
     }
 
     isInsideGraph(x, y) {
