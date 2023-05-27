@@ -9,17 +9,20 @@ import {
 export default class DnNearestLinkFinder {
     /**
      * @param {Graph} graph
-     * @param {{max_external_points: int}} options
+     * @param {{max_external_points: int, build_external_polygon: boolean}} options
      * @returns {number}
      */
     constructor(graph, options = {}) {
         this.graph = graph;
         this.options = {
             max_external_points: 10,
+            build_external_polygon: true,
         };
         Object.assign(this.options, options);
         this._buildIndex();
-        this._buildExternalPolygon();
+        if (this.options.build_external_polygon) {
+            this._buildExternalPolygon();
+        }
     }
 
     _buildIndex() {
@@ -62,7 +65,7 @@ export default class DnNearestLinkFinder {
     findLink(position) {
         let segments;
 
-        if (this.isInsideGraph(position[0], position[1])) {
+        if (!this.options.build_external_polygon || this.isInsideGraph(position[0], position[1])) {
             let node = this.findNearestPoint(position);
             let polygon = this.getPolygon(node, Math.atan2(position[1] - node.data.xy[1], position[0] - node.data.xy[0]));
             segments = this.polygonToSegments(polygon);
@@ -148,6 +151,9 @@ export default class DnNearestLinkFinder {
     }
 
     isInsideGraph(x, y) {
+        if (!this.options.build_external_polygon) {
+            return false;
+        }
         let xp = this._polygon.xp;
         let yp = this._polygon.yp;
         let npol = xp.length;
