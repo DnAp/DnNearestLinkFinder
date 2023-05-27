@@ -1,6 +1,6 @@
 {
   "name": "dn_nearest_link_finder",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Finds the nearest point belonging to the graph",
   "main": "index.js",
   "repository": {
